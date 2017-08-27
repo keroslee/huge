@@ -4,7 +4,7 @@
  * LoginController
  * Controls everything that is authentication-related
  */
-class LoginController extends Controller
+class PhoneController extends Controller
 {
     /**
      * Construct this object by extending the basic Controller class. The parent::__construct thing is necessary to
@@ -26,7 +26,7 @@ class LoginController extends Controller
             Redirect::home();
         } else {
             $data = array('redirect' => Request::get('redirect') ? Request::get('redirect') : NULL);
-            $this->View->render('admin/login', $data);
+            $this->View->render('phone', $data);
         }
     }
 
@@ -52,7 +52,7 @@ class LoginController extends Controller
             if (Request::post('redirect')) {
                 Redirect::toPreviousViewedPageAfterLogin(ltrim(urldecode(Request::post('redirect')), '/'));
             } else {
-                Redirect::to('admin/index');
+                Redirect::to('user/index');
             }
         } else {
             if (Request::post('redirect')) {
@@ -70,7 +70,7 @@ class LoginController extends Controller
     public function logout()
     {
         LoginModel::logout();
-        Redirect::to('login');
+        Redirect::home();
         exit();
     }
 

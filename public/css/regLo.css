@@ -1,0 +1,242 @@
+@charset "utf-8";
+/* CSS Document */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0;padding:0;}
+fieldset, img { border:none; }
+img{display: block;}
+address, caption, cite, code, dfn, th, var { font-style:normal; font-weight:normal; }
+ul, ol {list-style:none; }
+body {color:#333; font:12px/20px "SimSun","宋体","Arial Narrow",HELVETICA; background:#fff;/* overflow-y:scroll;*/ }
+a{color:#666; text-decoration:none;}
+.clear:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+
+#head{
+	width: 100%;
+	height: 2.2rem;
+	background:url(../img/logo.png) no-repeat center center;
+	background-size: 5.5rem auto;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+}
+#back{
+	width: 0.6rem;
+	height: 1.8rem;
+	float: left;
+	margin: 0.6rem 0 0 0.8rem;
+	overflow: hidden;
+}
+#home{
+	width: 1.4rem;
+	height: 1.4rem;
+	float: right;
+	margin: 0.4rem 0.8rem 0 0;
+}
+#head img{
+	width: 100%;
+	height: auto;
+}
+#headTxt{
+	width: 6rem;
+	height: 100%;
+	text-align: center;
+	color: #000;
+	font: 1rem/2.2rem "微软雅黑";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+#accountDiv,#accountDiv a{
+	width: 4rem;
+	height: 1.65rem;
+	float: right;
+}
+#accountDiv{
+	margin-right: 0.5rem;
+	margin-top: 0.25rem;
+}
+#nickName{
+	width: 2.35rem;
+	height: 100%;
+	float: left;
+	text-align: center;
+	font: 0.7rem/1.65rem "微软雅黑";
+	color: #333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#icon{
+	width: 1.65rem;
+	height: 1.65rem;
+	float: left;
+	border-radius: 1000px;
+	overflow: hidden;
+}
+#icon img{
+	width: 100%;
+	height: auto;
+}
+#nav{
+	width: 100%;
+	height: 2.2rem;
+	background: #3a313e;
+	opacity: 0.8;
+	position: fixed;
+	left: 0;
+	top: 2.2rem;
+	margin-top: 1px;
+	border-top: 1px solid #3b3846;
+}
+#nav ul{
+	width: 100%;
+	height: 100%;
+}
+#nav li{
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+#nav a{
+	display: block;
+	width: 100%;
+	height: 2.1rem;
+	color: #fff;
+	text-align: center;
+	font: 0.8rem/2.2rem "微软雅黑";
+}
+#nav .active{
+	color: #ffba58;
+	border-bottom: 0.1rem solid #FFBA58;
+}
+#foot{
+	width: 100%;
+	height: 3rem;
+	background: #3d3d3d;
+}
+#copyRight{
+	width: 78%;
+	height: 3rem;
+	margin: auto;
+	font: 0.7rem/1rem "微软雅黑";
+	color: #999;
+	text-align: center;
+}
+#bg{
+	width: 100%;
+	height: 30rem;
+	background:url(../img/DengLu_BG.png) no-repeat;
+	background-size:100% auto;
+	position: relative;
+}
+#formDiv,#nickForm{
+	width: 14.5rem;
+	height: 20rem;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -7.25rem;
+	margin-top: 4rem;
+}
+#numberDiv,#nickNameDiv{
+	width: 96%;
+	padding-left: 3%;
+	height: 2.2rem;
+	border :1px solid #ccc;
+	border-radius: 4px;
+	background: #fff;
+}
+#number,#nickNameInput{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	outline: 0;
+	background: none;
+	font-size: 0.8rem;
+}
+#codeDiv{
+	width: 100%;
+	height: 2.2rem;
+	margin-top: 1.5rem;
+}
+#code{
+	width: 8.3rem;
+	padding-left: 3%;
+	height: 100%;
+	background: #fff;
+	border :1px solid #ccc;
+	border-radius: 4px;
+	float: left;
+}
+#codeInput{
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	outline: 0;
+	background: none;
+	font-size: 0.8rem;
+}
+#sendCode{
+	width: 5.2rem;
+	height: 100%;
+	text-align: center;
+	font: 0.8rem/2.2rem "微软雅黑";
+	color: #fff;
+	float: right;
+	background: #f47171;
+	border: 1px solid #F47171;
+	border-radius: 4px;
+}
+#agreeDiv{
+	width: 100%;
+	height: 1rem;
+	margin-top: 1rem;
+}
+#agreeBtn{
+	width: 1rem;
+	height: 1rem;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	float: left;
+}
+#agreeFont{
+	width: 6rem;
+	height: 1rem;
+	font: 0.7rem/1rem "微软雅黑";
+	float: left;
+	margin-left: 0.3rem;
+	margin-top: 1px;
+	color: #c32525;
+}
+#loginBtn,#sureDiv{
+	width: 100%;
+	height: 2.1rem;
+	border-radius: 4px;
+	text-align: center;
+	font: 0.85rem/2.1rem "微软雅黑";
+	color: #fff;
+	margin-top: 5.5rem;
+	background: #f47171;
+}
+#nickForm{
+	display: block;
+	margin-top: 6.25rem;
+}
+#sureDiv{
+	margin-top: 4.65rem;
+}
+#fadeDiv{
+	width: 100%;
+	height: 1rem;
+	color: #378ad0;
+	text-align: center;
+	font: 0.8rem/1rem "微软雅黑";
+	margin-top: 12rem;
+}

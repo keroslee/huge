@@ -21,9 +21,9 @@ class View
             }
         }
 
-        require Config::get('PATH_VIEW') . '_templates/header.php';
+//        require Config::get('PATH_VIEW') . '_templates/header.php';
         require Config::get('PATH_VIEW') . $filename . '.php';
-        require Config::get('PATH_VIEW') . '_templates/footer.php';
+//        require Config::get('PATH_VIEW') . '_templates/footer.php';
     }
 
     /**

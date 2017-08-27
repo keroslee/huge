@@ -5,7 +5,7 @@
  * Handles all the PUBLIC profile stuff. This is not for getting data of the logged in user, it's more for handling
  * data of all the other users. Useful for display profile information, creating user lists etc.
  */
-class UserModel
+class VideoModel
 {
     /**
      * Gets an array that contains all the users in the database. The array's keys are the user ids.
@@ -19,7 +19,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT users.user_id, phone, user_name, user_email, user_active, user_has_avatar, user_deleted, video.url FROM users LEFT JOIN video ON users.user_id=video.user_id";
+        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted FROM users";
         $query = $database->prepare($sql);
         $query->execute();
 
@@ -34,13 +34,11 @@ class UserModel
 
             $all_users_profiles[$user->user_id] = new stdClass();
             $all_users_profiles[$user->user_id]->user_id = $user->user_id;
-            $all_users_profiles[$user->user_id]->phone = $user->phone;
             $all_users_profiles[$user->user_id]->user_name = $user->user_name;
             $all_users_profiles[$user->user_id]->user_email = $user->user_email;
             $all_users_profiles[$user->user_id]->user_active = $user->user_active;
             $all_users_profiles[$user->user_id]->user_deleted = $user->user_deleted;
             $all_users_profiles[$user->user_id]->user_avatar_link = (Config::get('USE_GRAVATAR') ? AvatarModel::getGravatarLinkByEmail($user->user_email) : AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id));
-            $all_users_profiles[$user->user_id]->video_url = $user->url;
         }
 
         return $all_users_profiles;
@@ -341,13 +339,5 @@ class UserModel
 
         // return one row (we only have one result or nothing)
         return $query->fetch();
-    }
-
-    public static function delete($user_id){
-        $database = DatabaseFactory::getFactory()->getConnection();
-        $sql = "DELETE FROM users WHERE user_id = :user_id";
-        $query = $database->prepare($sql);
-        $query->execute(array(":user_id" => $user_id));
-        return $query->rowCount();
     }
 }

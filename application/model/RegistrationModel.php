@@ -67,6 +67,8 @@ class RegistrationModel
             return false;
         }
 
+        return true;
+
         // send verification email
         if (self::sendVerificationEmail($user_id, $user_email, $user_activation_hash)) {
             Session::add('feedback_positive', Text::get('FEEDBACK_ACCOUNT_SUCCESSFULLY_CREATED'));

@@ -13,18 +13,6 @@
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
-
-		<script type="text/javascript">
-			function logout() {
-
-				if(confirm("确定要退出吗？")) {
-					document.userForm.submit();
-				}
-				/* layer.confirm("确定要退出吗？",function(){
-				        
-				}); */
-			}
-		</script>
 		<style type="text/css">
 			@charset "utf-8";
 			/* CSS Document */
@@ -104,7 +92,7 @@
 			
 			form[name=userForm] {
 				width: 80px;
-				background: url(/img/t03.png) no-repeat 5px 5px;
+				background: url(../../public/img/t03.png) no-repeat 5px 5px;
 				line-height: 33px;
 				height: 33px;
 				border-bottom: solid 2px #ccc;
@@ -125,7 +113,7 @@
 			#searchForm {
 				width: 100%;
 				min-height: 120px;
-				margin-top: 70px;
+				margin-top: 120px;
 				float: left;
 				/*background: #666666;*/
 			}
@@ -133,18 +121,19 @@
 			.formlist input {
 				margin: 0;
 				padding: 0;
-				width: 100px;
-				height: 30px;
+				width: 400px;
+				height: 40px;
+				padding-left: 20px;
 				outline: 0;
-				border-radius: 100px;
+				border-radius: 5px;
 				background: #fff;
-				text-align: center;
 				color: #333;
+				font-size: 18px;
 			}
 			
 			.formlist input[type=submit],
 			.formlist input[type=button] {
-				background: #fff url(/img/ico06.png) no-repeat 12px 3px;
+				background: #fff url(../../public/img/ico06.png) no-repeat 12px 3px;
 				background-size: 20px auto;
 				padding-left: 6px;
 			}
@@ -153,13 +142,12 @@
 				float: right;
 				margin-bottom: 15px;
 				margin-right: 10px;
-				background: #fff url(/img/f06.png) no-repeat 12px 5px;
+				background: #fff url(../../public/img/f06.png) no-repeat 12px 5px;
 			}
 			
 			table {
 				border: solid 1px #cbcbcb;
 				width: 100%;
-				min-height: 50px;
 				clear: both;
 				border-collapse: collapse;
 				border-spacing: 0;
@@ -181,27 +169,18 @@
 				padding: 0;
 				margin: 0;
 				font: 16px/34px "微软雅黑";
+				width:100px;
+				height: 50px;
 				text-indent: 11px;
 				border-right: dotted 1px #c7c7c7;
 				text-align: center;
 			}
-			
-			.tablelist tbody tr.odd {
-				background: #f5f8fa;
-			}
-			
-			tr:nth-child(1) {
-				background: url(/img/th.gif) repeat-x;
-				height: 34px;
-				line-height: 34px;
-				border-bottom: solid 1px #b6cad2;
-				text-indent: 11px;
+			tr>td:nth-last-child(1){
 				text-align: left;
 			}
 			
-			tr:nth-child(1) td {
-				border: 0;
-				font-weight: 600;
+			.tablelist tbody tr.odd {
+				background: #f5f8fa;
 			}
 			
 			#logo {
@@ -224,57 +203,62 @@
 				text-align: center;
 				font: 18px/30px "微软雅黑";
 			}
-			td .edit,td .delete{
-				float: left;
-				width: 50%;
+			#btnDiv{
+				width: 100%;
+				height: 50px;
+				margin-top: 20px;
+			}
+			#cancelBtn,#addBtn{
+				width: 130px;
 				height: 100%;
 				text-align: center;
+				font: 18px/50px "微软雅黑";
+				color: #fff;
+				background: rgb(244, 113, 113);
+				float: right;
+				border-radius: 5px;
 				cursor: pointer;
 			}
-			td .delete{
-				float: right;
-			}
-			td a:hover{
-				color: #FFA500;
+			#addBtn{
+				margin:0 20px;
 			}
 		</style>
-		<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
 
 		<div id="logo">
-			<img src="/img/88.png"/>
+			<img src="../../public/img/88.png" />
 		</div>
-		<form action="" name="userForm">
-			<!--<a href="#" onclick="logout()">退出登录</a>-->
-			<a href="<?php echo Config::get('URL'); ?>login/logout">退出登录</a>
-		</form>
-
-		<form id="searchForm" method="post">
+		<form id="searchForm" method="post" action="${base}/userList/select">
 			<div class="cont box-shadow clearfix" id="bdID">
 				<div class="formlist left10">
-					<div id="font">共<span class="numPage"><?=count($this->users)?></span>条数据</div>
-					<input type="button" class="btn_dark" value="添 加">
-					<div class="" id="userDiv">
+					<div id="userDiv">
 						<table style="width: 100%" border="1">
 							<tr>
-								<td>编号</td>
 								<td>姓名</td>
-								<td>手机号</td>
-								<td>URL</td>
-								<td>操作</td>
+								<td><input type="text" name="" id="name"/></td>
+								
 							</tr>
-							<?php foreach ($this->users as $user) { ?>
 							<tr>
-								<td><?= $user->user_id; ?></td>
-								<td><?= $user->user_name; ?></td>
-								<td><?= $user->phone; ?></td>
-								<td><?= $user->video_url; ?></td>
-								<td><a href="javascript:;" class="edit">编辑</a><a href="javascript:;"  class="delete" data-id="<?= $user->user_id; ?>">删除</a></td>
+								<td>电话</td>
+								<td><input type="text" name="" id="phone"/></td>
+								
 							</tr>
-							<?php } ?>
+							<tr>
+								<td>url</td>
+								<td><input type="text" name="" id="url"/></td>								
+							</tr>
 						</table>
+						<div id="btnDiv">							
+							<div id="addBtn">
+								添加
+							</div>
+							<div id="cancelBtn">
+								取消
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -300,32 +284,7 @@
 						$(this).css("background", "#fff");
 					}
 
-				});
-				$(".edit").click(function(){
-					window.location.href = 'edit.php';
-				});
-				$("table").on("click",".delete",function(){
-					var id = $(this).data('id')
-					$.post('/user/delete',{id:id}).done(function(ret){
-						console.log(ret)
-						if(ret>0) {
-							var index = $(this).index(".delete");
-							$("tr").eq(index + 1).remove();
-						}else{
-							alert('删除失败')
-						}
-					}).fail(function(ret){
-						console.log(ret,'fail')
-						alert('删除失败')
-					})
-				});
-				$(".btn_dark").click(function(){
-					var len = $("tr").length-1;
-					console.log(len);
-					//$("tr").eq(index+1).remove();
-					var str = "<tr><td>"+(len+1)+"</td><td>???</td><td>???</td><td>???</td><td><a href='javascript:;' class='edit'>编辑</a><a href='javascript:;'  class='delete'>删除</a></td></tr>"
-					$('tbody').append(str);
-				});
+				})
 			})
 		</script>
 	</body>

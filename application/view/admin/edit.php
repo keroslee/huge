@@ -92,7 +92,7 @@
 			
 			form[name=userForm] {
 				width: 80px;
-				background: url(../../public/img/t03.png) no-repeat 5px 5px;
+				background: url(../../../public/img/t03.png) no-repeat 5px 5px;
 				line-height: 33px;
 				height: 33px;
 				border-bottom: solid 2px #ccc;
@@ -133,7 +133,7 @@
 			
 			.formlist input[type=submit],
 			.formlist input[type=button] {
-				background: #fff url(../../public/img/ico06.png) no-repeat 12px 3px;
+				background: #fff url(/img/ico06.png) no-repeat 12px 3px;
 				background-size: 20px auto;
 				padding-left: 6px;
 			}
@@ -142,7 +142,7 @@
 				float: right;
 				margin-bottom: 15px;
 				margin-right: 10px;
-				background: #fff url(../../public/img/f06.png) no-repeat 12px 5px;
+				background: #fff url(/img/f06.png) no-repeat 12px 5px;
 			}
 			
 			table {
@@ -223,41 +223,41 @@
 				margin:0 20px;
 			}
 		</style>
-		<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
 
 		<div id="logo">
-			<img src="../../public/img/88.png" />
+			<img src="/img/88.png" />
 		</div>
-		<form id="searchForm" method="post" action="${base}/userList/select">
+
+		<form id="searchForm" method="post" action="/admin/update">
 			<div class="cont box-shadow clearfix" id="bdID">
 				<div class="formlist left10">
 					<div id="userDiv">
 						<table style="width: 100%" border="1">
 							<tr>
 								<td>姓名</td>
-								<td><input type="text" name="" id="name"/></td>
+								<td><input type="text" name="user_name" value="<?=$this->user?$this->user->user_name:''?>" id="name"/></td>
 								
 							</tr>
 							<tr>
 								<td>电话</td>
-								<td><input type="text" name="" id="phone"/></td>
+								<td><input type="text" name="phone" value="<?=$this->user?$this->user->phone:''?>" id="phone"/></td>
 								
 							</tr>
 							<tr>
 								<td>url</td>
-								<td><input type="text" name="" id="url"/></td>								
+								<td><input type="text" name="url" value="<?=$this->user?$this->user->url:''?>" id="url"/></td>
 							</tr>
 						</table>
-						<div id="btnDiv">							
-							<div id="addBtn">
-								添加
-							</div>
-							<div id="cancelBtn">
+						<div id="btnDiv">
+                            <input hidden name="id" value="<?=$this->user?$this->user->user_id:''?>">
+							<input type="submit" id="addBtn" value="确定">
+							<a id="cancelBtn" href="/admin">
 								取消
-							</div>
+							</a>
 						</div>
 					</div>
 				</div>

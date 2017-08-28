@@ -145,4 +145,16 @@ class PhoneController extends Controller
         );
         Redirect::to('login/index');
     }
+
+    public function verify(){
+        $phone = Request::post('phone');
+        $code = Request::post('code');
+        if(UserModel::verify()){
+            if(LoginModel::login($phone,$phone)){
+                echo 'true';
+            }
+        }else{
+            echo 'false';
+        }
+    }
 }

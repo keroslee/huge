@@ -55,8 +55,8 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted
-                FROM users WHERE user_id = :user_id LIMIT 1";
+        $sql = "SELECT users.user_id, phone, user_name, user_email, user_active, user_has_avatar, user_deleted, url
+                FROM users LEFT JOIN video ON users.user_id=video.user_id WHERE users.user_id = :user_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => $user_id));
 
@@ -349,5 +349,64 @@ class UserModel
         $query = $database->prepare($sql);
         $query->execute(array(":user_id" => $user_id));
         return $query->rowCount();
+    }
+
+    public static function insert(){
+        $user_name = strip_tags(Request::post('user_name'));
+        $phone = (int)strip_tags(Request::post('phone'));
+        $url = strip_tags(Request::post('url'));
+
+        echo $user_name.'/'.$phone.'/'.$url;
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+        $sql = "INSERT INTO `users` (phone, user_name,user_provider_type) VALUES (:phone, :user_name,'DEFAULT')";
+        $query = $database->prepare($sql);
+        $query->execute(array(':phone' => $phone, ':user_name' => $user_name));
+        if($query->rowCount()){
+            $lastId = (int)$database->lastInsertId();
+            $sql = "INSERT INTO `video` (url, user_id) VALUES (:url, :user_id)";
+            $query = $database->prepare($sql);
+            $query->execute(array(':url' => $url, ':user_id' => $lastId));
+            return $query->rowCount();
+        }
+        return 0;
+    }
+
+    public static function update(){
+        $user_id = (int)strip_tags(Request::post('id'));
+        $user_name = strip_tags(Request::post('user_name'));
+        $phone = (int)strip_tags(Request::post('phone'));
+        $url = strip_tags(Request::post('url'));
+
+        echo $user_id.'/'.$user_name.'/'.$phone.'/'.$url;
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+        $sql = "UPDATE `users` SET phone=:phone, user_name=:user_name WHERE user_id=:user_id";
+        $query = $database->prepare($sql);
+        $query->execute(array(':user_id' => $user_id, ':phone' => $phone, ':user_name' => $user_name));
+        $countUser = $query->rowCount();
+
+        $sql = "UPDATE `video` SET url=:url WHERE (user_id=:user_id)";
+        $query = $database->prepare($sql);
+        $query->execute(array(':url' => $url, ':user_id' => $user_id));
+        $countVideo = $query->rowCount();
+
+        if(!$countVideo){
+            $sql = "INSERT INTO `video` (url, user_id) VALUES (:url, :user_id)";
+            $query = $database->prepare($sql);
+            $countVideo = $query->execute(array(':url' => $url, ':user_id' => $user_id));
+        }
+        return $countUser||$countVideo?1:0;
+    }
+
+    public static function verify(){
+        $code = strip_tags(Request::post('code'));
+        $phone = (int)strip_tags(Request::post('phone'));
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+        $sql = "SELECT * FROM users WHERE phone=:phone AND code=:code LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':phone' => $phone, ':code' => $code));
+        return $query->rowCount()>0;
     }
 }

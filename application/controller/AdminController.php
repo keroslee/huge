@@ -24,6 +24,41 @@ class AdminController extends Controller
         );
     }
 
+    public function edit()
+    {
+        $id = Request::post('id');
+        if($id){
+            $user = UserModel::getPublicProfileOfUser($id);
+        }else{
+            $user = null;
+        }
+
+        $this->View->render('admin/edit', array(
+                'user' => $user)
+        );
+    }
+
+    public function update()
+    {
+        $id = Request::post('id');
+        if($id){
+            $res = UserModel::update();
+        }else{
+            $res = UserModel::insert();
+        }
+var_dump($res);
+        if ($res) {
+            Redirect::to('/admin');
+        } else {
+//            Redirect::to('/admin/edit');
+        }
+    }
+
+    public function delete()
+    {
+        echo UserModel::delete(Request::post('id'));
+    }
+
     public function actionAccountSettings()
     {
         AdminModel::setAccountSuspensionAndDeletionStatus(

@@ -63,7 +63,7 @@ return array(
      */
     'DB_TYPE' => 'mysql',
     'DB_HOST' => '127.0.0.1',
-    'DB_NAME' => 'huge',
+    'DB_NAME' => '88zone',
     'DB_USER' => 'root',
     'DB_PASS' => 'keros',
     'DB_PORT' => '3306',

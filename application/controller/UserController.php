@@ -154,9 +154,4 @@ class UserController extends Controller
         else
             Redirect::to('user/changePassword');
     }
-
-    public function delete()
-    {
-        echo UserModel::delete(Request::post('id'));
-    }
 }

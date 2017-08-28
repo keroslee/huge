@@ -251,7 +251,7 @@
 			<a href="<?php echo Config::get('URL'); ?>login/logout">退出登录</a>
 		</form>
 
-		<form id="searchForm" method="post">
+		<div id="searchForm">
 			<div class="cont box-shadow clearfix" id="bdID">
 				<div class="formlist left10">
 					<div id="font">共<span class="numPage"><?=count($this->users)?></span>条数据</div>
@@ -271,7 +271,13 @@
 								<td><?= $user->user_name; ?></td>
 								<td><?= $user->phone; ?></td>
 								<td><?= $user->video_url; ?></td>
-								<td><a href="javascript:;" class="edit">编辑</a><a href="javascript:;"  class="delete" data-id="<?= $user->user_id; ?>">删除</a></td>
+								<td>
+                                    <form id="form<?= $user->user_id; ?>" action="/admin/edit" method="post">
+                                        <input name="id" hidden value="<?= $user->user_id; ?>">
+                                    </form>
+                                    <a href="javascript:;" class="edit" data-id="<?= $user->user_id; ?>">编辑</a>
+                                    <a href="javascript:;"  class="delete" data-id="<?= $user->user_id; ?>">删除</a>
+                                </td>
 							</tr>
 							<?php } ?>
 						</table>
@@ -279,7 +285,7 @@
 				</div>
 			</div>
 
-		</form>
+		</div>
 
 		<script type="text/javascript">
 			$(function() {
@@ -302,7 +308,8 @@
 
 				});
 				$(".edit").click(function(){
-					window.location.href = 'edit.php';
+                    var id = $(this).data('id')
+                    $('#form'+id).submit()
 				});
 				$("table").on("click",".delete",function(){
 					var id = $(this).data('id')
@@ -320,11 +327,7 @@
 					})
 				});
 				$(".btn_dark").click(function(){
-					var len = $("tr").length-1;
-					console.log(len);
-					//$("tr").eq(index+1).remove();
-					var str = "<tr><td>"+(len+1)+"</td><td>???</td><td>???</td><td>???</td><td><a href='javascript:;' class='edit'>编辑</a><a href='javascript:;'  class='delete'>删除</a></td></tr>"
-					$('tbody').append(str);
+				    window.location.href = '/admin/edit'
 				});
 			})
 		</script>
